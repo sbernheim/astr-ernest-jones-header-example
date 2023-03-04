@@ -1,0 +1,30 @@
+<job concurrent_runs="10" ufgConcurrency="10">
+    <!-- Load the reusable runner and browser configurations and any reusable Action Blocks -->
+    <load>definitions.xml</load>
+    <load>configurations.xml</load>
+
+    <!-- Open a new Applitools batch -->
+    <batch name="ASTR Result Example - Ernest Jones Banner">
+        <!-- Add as many tests as desired -->
+        <test appname="UK Digital Transformation" testname="BrandLogo_Ernest Jones_Desktop">
+            <!-- select one of the runner/browser configurations we specified in configurations.xml -->
+            <configurations names="chromeLocal" />
+            <!-- List the desired actions the test should preform -->
+            <execute>
+                <action type="navigate">https://www.ernestjones.co.uk/</action>
+                <!-- dismiss the Cookie Consent Dialog modal if it pops up -->
+                <action type="click" by="css" selector="#js-cookie-consent-overlay > div.c-cookie-consent-dialog.js-cookie-consent-dialog--start button.cookie-consent-dialog__cta.cookie-consent-dialog__cta--purple.js-close-dialog" implicit_wait="5" onError="continue"/>
+                <!-- dismiss the exponea advertisement modal if it pops up -->
+                <!--action type="implicitWait" by="css" selector="span.l-exponea-close-cross" implicit_wait="10" onError="continue">10000</action-->
+                <!-- Neither implicitWait nor click action's implicit waits for the l-exponea-close-cross 
+                    element to show up as visible or enabled are working.  The implcitWait returns immediately
+                    with a message that says it timed out while waiting, so that's clearly a defect.  The click
+                    action's implicit wait might be returning because the element actually does exist in the 
+                    DOM, but isn't enabled or visible yet, so it fails when it tries to click on the element.  -->
+                <action type="sleep">3000</action>
+                <action type="click" by="css" selector="span.l-exponea-close-cross" implicit_wait="5" onError="continue"/>
+                <action type="check" target="region" by="css" selector="header#js-header" stepName="Header Only" matchlevel="strict" fullPage="false" useDom="true"/>
+            </execute>
+        </test>
+    </batch>
+</job>

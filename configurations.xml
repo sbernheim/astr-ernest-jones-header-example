@@ -1,0 +1,32 @@
+<definitions>
+    <ChromeOptions name="headless">
+		<argument>--headless</argument>
+	</ChromeOptions>
+
+	<configuration name="chromeLocal"> 
+		<applitools>applitoolsConf.xml</applitools>
+		<driver>chrome</driver>
+		<viewport width="1366" height="728"></viewport>
+	</configuration>
+
+
+	<configuration	name="grid">
+		<applitools>applitoolsConf.xml</applitools>
+		<!-- <driver useChromeOptions="headless">chrome</driver> -->
+		<driver>chrome</driver>
+		<viewport width = "800" height = "600" ></viewport>
+		<visualGrid>
+			
+			<browser type="CHROME" width="1500" height="1000" />
+			<browser type="CHROME" width="1300" height="800" />
+ 			<browser type="firefox" width="1300" height="800" />
+			<browser type="firefox" width="1100" height="600" />
+
+			<chromeDeviceEmulation name="iPhone_X" /> 
+			<chromeDeviceEmulation name="iPhone_X"  orientation="LANDSCAPE"/> 
+			<iosDevice name="iPad_7" />
+			<iosDevice name="iPad_7" orientation="LANDSCAPE" />
+
+		</visualGrid> 
+	</configuration>
+</definitions>
